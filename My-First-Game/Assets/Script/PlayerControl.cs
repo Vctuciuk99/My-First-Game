@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float speedRotation;
     [SerializeField] float jumpForce;
     private Rigidbody rb;
-    private bool onPlatform;
+    private int jumpCount;
 
     // Start is called before the first frame update
     void Start()
@@ -25,27 +25,30 @@ public class PlayerControl : MonoBehaviour
         //rotate player
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal"), 0) * Time.deltaTime * speedRotation);
 
-        //Player jump
-        if (Input.GetButtonDown("Jump") && onPlatform)
+        //make player jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump(); 
+        }
+        
+    }
+    //set counter for double jump
+    private void jump()
+    {
+        jumpCount += 1;
+        if (jumpCount < 2)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
+        
     }
+    //prevent player from infinite jumping
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            Debug.Log("Player is on platform");
-            onPlatform = true;
+            jumpCount = 0;
         }
     }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            Debug.Log("Player exited platform");
-            onPlatform = false;
-        }
-    }
-
+  
 }
