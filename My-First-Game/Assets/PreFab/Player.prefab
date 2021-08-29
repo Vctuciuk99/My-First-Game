@@ -149,6 +149,8 @@ MonoBehaviour:
   moveSpeed: 5
   speedRotation: 200
   jumpForce: 100
+  shades: {fileID: 2781655560901814766}
+  bag: {fileID: 2781655561128364004}
 --- !u!1 &2781655560901814765
 GameObject:
   m_ObjectHideFlags: 0

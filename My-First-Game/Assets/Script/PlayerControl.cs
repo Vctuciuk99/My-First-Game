@@ -7,6 +7,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float speedRotation;
     [SerializeField] float jumpForce;
+    
+    
+    public MeshRenderer shades, bag;
+
     private Rigidbody rb;
     private int jumpCount;
 
